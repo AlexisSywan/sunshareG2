@@ -1,72 +1,86 @@
 <template>
-    <vue-apex-charts type=radialBar height=350 :options="chartOptions" :series="series"/>
+    <vue-apex-charts type=area height=350 max-width=100% :options="chartOptions" :series="series"/>
 </template>
 
 <script>
     import VueApexCharts from 'vue-apexcharts'
 
     export default {
-        name: "apexchart",
+        name: "StackedAreaApexChart",
         components: {
             VueApexCharts
         },
         data() {
             return {
-                series: [76, 67, 61, 90],
+                series: [
+                    {
+                        name: 'Soutir',
+                        data: this.generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
+                            min: -10,
+                            max: 60
+                        })
+                    },
+                    {
+                        name: 'Inject',
+                        data: this.generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
+                            min: -10,
+                            max: 20
+                        })
+                    },
+                    {
+                        name: 'Autoconsommation',
+                        data: this.generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
+                            min: -10,
+                            max: 15
+                        })
+                    }
+                ],
                 chartOptions: {
-                    plotOptions: {
-                        radialBar: {
-                            offsetY: -10,
-                            startAngle: 0,
-                            endAngle: 270,
-                            hollow: {
-                                margin: 5,
-                                size: '30%',
-                                background: 'transparent',
-                                image: undefined,
-                            },
-                            dataLabels: {
-                                name: {
-                                    show: false,
-
-                                },
-                                value: {
-                                    show: false,
-                                }
+                    chart: {
+                        stacked: true,
+                        events: {
+                            selection: function (chart, e) {
+                                console.log(new Date(e.xaxis.min))
                             }
+                        },
+                    },
+                    colors: ['#ffa000', '#00E396', '#CED4DC'],
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        curve: 'smooth'
+                    },
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            opacityFrom: 0.6,
+                            opacityTo: 0.8,
                         }
                     },
-                    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-                    labels: ['Vimeo', 'Messenger', 'Facebook', 'LinkedIn'],
                     legend: {
-                        show: true,
-                        floating: true,
-                        fontSize: '16px',
-                        position: 'left',
-                        offsetX: 160,
-                        offsetY: 10,
-                        labels: {
-                            useSeriesColors: true,
-                        },
-                        markers: {
-                            size: 0
-                        },
-                        formatter: function (seriesName, opts) {
-                            return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
-                        },
-                        itemMargin: {
-                            horizontal: 1,
-                        }
+                        position: 'top',
+                        horizontalAlign: 'left'
                     },
-                    responsive: [{
-                        breakpoint: 480,
-                        options: {
-                            legend: {
-                                show: false
-                            }
-                        }
-                    }]
+                    xaxis: {
+                        type: 'datetime'
+                    },
                 }
+            }
+        },
+        methods: {
+            generateDayWiseTimeSeries: function (baseval, count, yrange) {
+                var i = 0;
+                var series = [];
+                while (i < count) {
+                    var x = baseval;
+                    var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+
+                    series.push([x, y]);
+                    baseval += 86400000;
+                    i++;
+                }
+                return series;
             }
         }
     }

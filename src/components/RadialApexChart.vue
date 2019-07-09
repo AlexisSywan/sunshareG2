@@ -6,13 +6,13 @@
     import VueApexCharts from 'vue-apexcharts'
 
     export default {
-        name: "apexchart",
+        name: "RadialApexChart",
         components: {
             VueApexCharts
         },
         data() {
             return {
-                series: [76, 67, 61, 90],
+                series: [76, 67],
                 chartOptions: {
                     plotOptions: {
                         radialBar: {
@@ -36,8 +36,8 @@
                             }
                         }
                     },
-                    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-                    labels: ['Vimeo', 'Messenger', 'Facebook', 'LinkedIn'],
+                    colors: ['#1ab7ea', '#ffa000'],
+                    labels: ['Production', 'Consommation'],
                     legend: {
                         show: true,
                         floating: true,
