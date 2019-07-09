@@ -12,7 +12,11 @@
         },
         data() {
             return {
-                series: [76, 67],
+                series: [
+                    79,//inject% = inject/(auto+soutir)
+                    62,//soutir% = soutir/absolu(auto)
+                    38 //auto% = 1-soutir%
+                ],
                 chartOptions: {
                     plotOptions: {
                         radialBar: {
@@ -36,8 +40,8 @@
                             }
                         }
                     },
-                    colors: ['#1ab7ea', '#ffa000'],
-                    labels: ['Production', 'Consommation'],
+                    colors: ['#000000', '#1ab7ea', '#ffa000'],
+                    labels: ['Inject', 'Autoconsommation', 'Soutir'],
                     legend: {
                         show: true,
                         floating: true,

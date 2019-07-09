@@ -20,13 +20,15 @@
         data() {
             return {
                 conseils: [
-                    {title: "Les consommations éléctriques"},
-                    {title: "Le multimédia"},
-                    {title: "Le lavage"},
-                    {title: "Le froid"},
-                    {title: "Le petit éléctroménager"},
-                    {title: "L'éclairage"},
-                    {title: "La cuisson"},
+                    {title: "On adopte le réflexe « heures creuses »"},
+                    {title: "On choisit les bons appareils électroménagers"},
+                    {title: "On entretient notre réfrigérateur régulièrement"},
+                    {title: "On évite de laisser les appareils en veille"},
+                    {title: "On préfère la douche au bain"},
+                    {title: "On remplace les ampoules incandescentes par des ampoules LED"},
+                    {title: "On modifie nos habitudes pour cuisiner"},
+                    {title: "On évite de surchauffer notre logement"},
+                    {title: "On optimise la climatisation de notre logement"},
                 ]
             }
         }
